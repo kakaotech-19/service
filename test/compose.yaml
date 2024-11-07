@@ -1,0 +1,70 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - todak-network
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  backend:
+    container_name: back
+    image: ghcr.io/kakaotech-19/kakaotech-19/todaktodak-api:latest
+    networks:
+      - todak-network
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - LOGGING_LEVEL_ROOT=ERROR
+    env_file:
+      - .env
+
+  frontend:
+    container_name: frontend
+    image: ghcr.io/kakaotech-19/kakaotech-19/frontend:latest
+    networks:
+      - todak-network
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  # ai-text:
+  #   container_name: ai
+  #   image: ghcr.io/kakaotech-19/kakaotech-19/ai-text:latest
+  #   networks:
+  #     - todak-network
+  #   expose:
+  #     - "8000"
+  #   restart: unless-stopped
+
+  # ai-image:
+  #   container_name: ai-image
+  #   image: ghcr.io/kakaotech-19/kakaotech-19/ai-image:latest
+  #   networks:
+  #     - todak-network
+  #   ports:
+  #     - 8000:8000
+  #   restart: unless-stopped
+
+  # ai-music:
+  #   container_name: ai-music
+  #   image: ghcr.io/kakaotech-19/kakaotech-19/ai-image:latest
+  #   networks:
+  #     - todak-network
+  #   expose:
+  #     - "8000"
+  #   restart: unless-stopped
+
+networks:
+  todak-network:
+    name: todak-network
+    driver: bridge
