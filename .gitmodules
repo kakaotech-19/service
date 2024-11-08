@@ -1,0 +1,15 @@
+[submodule "test/backend"]
+	path = test/backend
+	url = https://github.com/kakaotech-19/todaktodak-api
+[submodule "test/frontend"]
+	path = test/frontend
+	url = https://github.com/kakaotech-19/frontend
+[submodule "test/ai/text"]
+	path = test/ai/text
+	url = https://github.com/kakaotech-19/ai-text
+[submodule "test/ai/music"]
+	path = test/ai/music
+	url = https://github.com/kakaotech-19/ai-music
+[submodule "test/ai/image"]
+	path = test/ai/image
+	url = https://github.com/kakaotech-19/ai-image
